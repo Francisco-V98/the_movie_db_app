@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/appbar_proyect.dart';
+import '../widgets/widgets.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -15,17 +15,25 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
-
-
 class _Body extends StatelessWidget {
-  const _Body({
-    super.key,
-  });
+  const _Body();
 
   @override
   Widget build(BuildContext context) {
     return const Column(
-      children: [],
+      children: [
+        HeaderCarrousel(),
+        SizedBox(height: 8),
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CarrouselContinueWaching(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
