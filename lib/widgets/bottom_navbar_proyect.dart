@@ -24,7 +24,7 @@ class BottomNavBarProyect extends StatelessWidget {
             unselectedItemColor: Colors.white,
             showSelectedLabels: false,
             showUnselectedLabels: false,
-            currentIndex: 1,
+            currentIndex: 0,
             type: BottomNavigationBarType.fixed,
             elevation: 0,
 

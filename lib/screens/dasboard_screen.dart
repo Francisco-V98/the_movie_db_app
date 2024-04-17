@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
 
@@ -26,19 +25,17 @@ class _Body extends StatelessWidget {
           child: Column(
             children: [
               HeaderCarrousel(),
-              SizedBox(height: 8),
-              Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CarrouselContinueWaching(),
-                    SizedBox(height: 24),
-                    CarrouselContinueWaching(),
-                    SizedBox(height: 24),
-                    CarrouselContinueWaching(),
-                  ],
-                ),
+              SizedBox(height: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CarrouselContinueWaching(),
+                  SizedBox(height: 24),
+                  CarrouselContinueWaching(),
+                  SizedBox(height: 24),
+                  CarrouselContinueWaching(),
+                  SizedBox(height: 120),
+                ],
               ),
             ],
           ),
@@ -46,7 +43,7 @@ class _Body extends StatelessWidget {
         Positioned(
           left: 32,
           right: 32,
-          bottom: 24,
+          bottom: 16,
           child: BottomNavBarProyect(),
         ),
       ],
