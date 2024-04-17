@@ -13,15 +13,15 @@ class CarrouselContinueWaching extends StatelessWidget {
         const TitleSectionDashboard(),
         const SizedBox(height: 16),
         SizedBox(
-          height: 160,
+          height: 140,
           child: ListView.builder(
             itemCount: 6,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return const Row(
                 children: [
-                  CardContinueWatchingSection(),
                   SizedBox(width: 8),
+                  CardMovieHorizonListSection(),
                 ],
               );
             },
