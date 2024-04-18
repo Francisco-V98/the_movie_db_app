@@ -13,7 +13,8 @@ class ListMoviesService {
       if (response.statusCode == 200) {
         return ListMoviesModel.fromJson(response.data);
       } else {
-        throw Exception('Failed to load List Movies Popular: ${response.statusCode}');
+        throw Exception(
+            'Failed to load List Movies Popular: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Failed to load List Movies Popular: $e');
