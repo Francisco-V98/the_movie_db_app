@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CardHeaderCarrousel extends StatelessWidget {
+  final String image;
   const CardHeaderCarrousel({
     super.key,
+    required this.image,
   });
 
   @override
@@ -10,7 +12,7 @@ class CardHeaderCarrousel extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(24),
       child: Image.network(
-        'https://media.istockphoto.com/id/1289461335/photo/portrait-of-a-handsome-black-man.jpg?s=612x612&w=0&k=20&c=gDibbpmkeV04ta3ociwAgpqcjdeU5sI1nnd78wrnz-g=',
+        image,
         fit: BoxFit.cover,
         width: MediaQuery.of(context).size.width,
       ),
