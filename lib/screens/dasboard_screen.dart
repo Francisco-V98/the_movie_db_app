@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:drop_shadow/drop_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:the_movie_db_app/infrastructure/models/list_movies_model.dart';
 import 'package:the_movie_db_app/infrastructure/providers/lits_movies_provider.dart';
 import '../widgets/widgets.dart';
 
@@ -10,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color.fromARGB(255, 24, 24, 24),
+      backgroundColor: Color.fromARGB(255, 15, 15, 15),
       appBar: AppBarProyect(),
       body: _Body(),
     );
@@ -22,6 +24,9 @@ class _Body extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listMoviePopular = ref.watch(listMoviesPopularProvider);
+    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider);
+    final listMovieTopRated = ref.watch(listMoviesTopRatedProvider);
+    final listMovieUpcoming = ref.watch(listMoviesUpcomingProvider);
     return Stack(
       children: [
         SingleChildScrollView(
@@ -30,45 +35,79 @@ class _Body extends ConsumerWidget {
               const SizedBox(height: 16),
               listMoviePopular.when(
                 data: (data) {
-                  return CarouselSlider.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index, realIdx) {
-                      final movie = data.results![index];
-                      final backdropPath = movie.backdropPath;
-                      const urlImageBase =
-                          'https://media.themoviedb.org/t/p/w400';
-                      var imageUrl = urlImageBase + backdropPath!;
-                      return CardHeaderCarrousel(
-                        image: imageUrl,
-                      );
-                    },
-                    options: CarouselOptions(
-                      enableInfiniteScroll: true,
-                      autoPlay: true,
-                      aspectRatio: 2.0,
-                      initialPage: 1,
-                      enlargeCenterPage: true,
-                      height: 156,
-                    ),
-                  );
+                  return headerCarrousel(context, data);
                 },
                 error: ((error, stackTrace) {
                   return Text(error.toString());
                 }),
                 loading: () {
-                  return const Center(child: CircularProgressIndicator());
+                  return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 300,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
                 },
               ),
               const SizedBox(height: 24),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CarrouselContinueWaching(),
-                  SizedBox(height: 24),
-                  CarrouselContinueWaching(),
-                  SizedBox(height: 24),
-                  CarrouselContinueWaching(),
-                  SizedBox(height: 120),
+                  listMovieNowPlaying.when(
+                    data: (data) {
+                      return listMovies(data, 'Now', 'Playing');
+                    },
+                    error: ((error, stackTrace) {
+                      return Text(error.toString());
+                    }),
+                    loading: () {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 200,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  listMovieTopRated.when(
+                    data: (data) {
+                      return listMovies(data, 'Top', 'Rated');
+                    },
+                    error: ((error, stackTrace) {
+                      return Text(error.toString());
+                    }),
+                    loading: () {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 200,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  listMovieUpcoming.when(
+                    data: (data) {
+                      return listMovies(data, 'Up', 'Comming');
+                    },
+                    error: ((error, stackTrace) {
+                      return Text(error.toString());
+                    }),
+                    loading: () {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 200,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 120),
                 ],
               ),
             ],
@@ -81,6 +120,76 @@ class _Body extends ConsumerWidget {
           child: BottomNavBarProyect(),
         ),
       ],
+    );
+  }
+
+  Widget listMovies(
+    ListMoviesModel data,
+    String titleThing,
+    String titleBold,
+  ) {
+    return Column(
+      children: [
+        TitleSectionDashboard(titleThing: titleThing, titleBold: titleBold),
+        const SizedBox(height: 16),
+        DropShadow(
+          opacity: 0.5,
+          child: SizedBox(
+            height: 140,
+            child: ListView.builder(
+              itemCount: 19,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                final movie = data.results![index];
+                final posterPath = movie.posterPath;
+                const urlImageBase = 'https://media.themoviedb.org/t/p/w400';
+                var imageUrl = urlImageBase + posterPath!;
+                return Row(
+                  children: [
+                    const SizedBox(width: 8),
+                    CardMovieHorizonListSection(
+                      image: imageUrl,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget headerCarrousel(BuildContext context, ListMoviesModel data) {
+    return Transform.scale(
+      scale: 100/89,
+      child: DropShadow(
+        offset: const Offset(0, 10),
+        opacity: 0.7,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: CarouselSlider.builder(
+            itemCount: 20,
+            itemBuilder: (context, index, realIdx) {
+              final movie = data.results![index];
+              final backdropPath = movie.backdropPath;
+              const urlImageBase = 'https://media.themoviedb.org/t/p/w400';
+              var imageUrl = urlImageBase + backdropPath!;
+              return CardHeaderCarrousel(
+                image: imageUrl,
+              );
+            },
+            options: CarouselOptions(
+              enableInfiniteScroll: true,
+              autoPlay: true,
+              aspectRatio: 2.0,
+              initialPage: 1,
+              enlargeCenterPage: true,
+              height: 156,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

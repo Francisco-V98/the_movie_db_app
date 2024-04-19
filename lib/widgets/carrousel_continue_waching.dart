@@ -21,7 +21,7 @@ class CarrouselContinueWaching extends StatelessWidget {
               return const Row(
                 children: [
                   SizedBox(width: 8),
-                  CardMovieHorizonListSection(),
+                  CardMovieHorizonListSection(image: '',),
                 ],
               );
             },
