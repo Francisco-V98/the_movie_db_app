@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../widgets/widgets.dart';
 
 class HeaderCarrousel extends StatelessWidget {
+  final String image;
   const HeaderCarrousel({
-    super.key,
+    super.key, required this.image,
   });
 
   @override
@@ -12,7 +13,9 @@ class HeaderCarrousel extends StatelessWidget {
     return CarouselSlider.builder(
       itemCount: 3,
       itemBuilder: (context, index, realIdx) {
-        return const CardHeaderCarrousel();
+        return CardHeaderCarrousel(
+          image: image,
+        );
       },
       options: CarouselOptions(
         enableInfiniteScroll: true,
