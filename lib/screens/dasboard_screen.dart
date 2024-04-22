@@ -31,7 +31,6 @@ class _Body extends ConsumerWidget {
         SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 16),
               listMoviePopular.when(
                 data: (data) {
                   return headerCarrousel(context, data);
@@ -70,25 +69,6 @@ class _Body extends ConsumerWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 24),
-                  listMovieTopRated.when(
-                    data: (data) {
-                      return listMovies(data, 'Top', 'Rated');
-                    },
-                    error: ((error, stackTrace) {
-                      return Text(error.toString());
-                    }),
-                    loading: () {
-                      return SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 200,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 24),
                   listMovieUpcoming.when(
                     data: (data) {
                       return listMovies(data, 'Up', 'Comming');
@@ -106,7 +86,24 @@ class _Body extends ConsumerWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 120),
+                  listMovieTopRated.when(
+                    data: (data) {
+                      return listMovies(data, 'Top', 'Rated');
+                    },
+                    error: ((error, stackTrace) {
+                      return Text(error.toString());
+                    }),
+                    loading: () {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 200,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 100),
                 ],
               ),
             ],
@@ -123,12 +120,11 @@ class _Body extends ConsumerWidget {
   }
 
   Widget listMovies(ListMoviesModel data, String titleThing, String titleBold) {
-    return Column(
+    return Stack(
       children: [
         TitleSectionDashboard(titleThing: titleThing, titleBold: titleBold),
-        const SizedBox(height: 16),
         SizedBox(
-          height: 140,
+          height: 200,
           child: ListView.builder(
             itemCount: 19,
             scrollDirection: Axis.horizontal,
@@ -159,6 +155,7 @@ class _Body extends ConsumerWidget {
 
   Widget headerCarrousel(BuildContext context, ListMoviesModel data) {
     return SizedBox(
+      height: 200,
       width: MediaQuery.of(context).size.width,
       child: CarouselSlider.builder(
         itemCount: 20,
