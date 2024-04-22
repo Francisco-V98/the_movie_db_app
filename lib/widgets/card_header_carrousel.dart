@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_movie_db_app/screens/dasboard_screen.dart';
+import 'package:the_movie_db_app/screens/detail_screen.dart';
 
 class CardHeaderCarrousel extends StatelessWidget {
   final String image;
@@ -17,7 +17,7 @@ class CardHeaderCarrousel extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const DashboardScreen(),
+            builder: (context) => const DetailScreen(),
           ),
         );
       },
