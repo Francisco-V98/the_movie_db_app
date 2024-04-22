@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CardMovieHorizonListSection extends StatelessWidget {
@@ -9,21 +11,43 @@ class CardMovieHorizonListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      height: 140,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.network(
-          image,
-          fit: BoxFit.cover,
+    return Stack(
+      children: [
+        Container(
           width: 100,
           height: 140,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Stack(
+              children: [
+                
+                Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                  width: 100,
+                  height: 140,
+                ),
+                Positioned.fill(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(color: Colors.transparent),
+                  ),
+                ),
+                Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                  width: 100,
+                  height: 140,
+                ),
+                
+              ],
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

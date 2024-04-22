@@ -42,12 +42,12 @@ class _Body extends ConsumerWidget {
                 }),
                 loading: () {
                   return SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 300,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 },
               ),
               const SizedBox(height: 24),
@@ -123,37 +123,34 @@ class _Body extends ConsumerWidget {
     );
   }
 
-  Widget listMovies(
-    ListMoviesModel data,
-    String titleThing,
-    String titleBold,
-  ) {
+  Widget listMovies(ListMoviesModel data, String titleThing, String titleBold) {
     return Column(
       children: [
         TitleSectionDashboard(titleThing: titleThing, titleBold: titleBold),
         const SizedBox(height: 16),
-        DropShadow(
-          opacity: 0.5,
-          child: SizedBox(
-            height: 140,
-            child: ListView.builder(
-              itemCount: 19,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                final movie = data.results![index];
-                final posterPath = movie.posterPath;
-                const urlImageBase = 'https://media.themoviedb.org/t/p/w400';
-                var imageUrl = urlImageBase + posterPath!;
-                return Row(
-                  children: [
-                    const SizedBox(width: 8),
-                    CardMovieHorizonListSection(
-                      image: imageUrl,
-                    ),
-                  ],
-                );
-              },
-            ),
+        SizedBox(
+          height: 140,
+          child: ListView.builder(
+            itemCount: 19,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              final movie = data.results![index];
+              final posterPath = movie.posterPath;
+              const urlImageBase = 'https://media.themoviedb.org/t/p/w400';
+              var imageUrl = urlImageBase + posterPath!;
+              return Row(
+                children: [
+                  const SizedBox(width: 8),
+                  Stack(
+                    children: [
+                      CardMovieHorizonListSection(
+                        image: imageUrl,
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ],
@@ -161,33 +158,26 @@ class _Body extends ConsumerWidget {
   }
 
   Widget headerCarrousel(BuildContext context, ListMoviesModel data) {
-    return Transform.scale(
-      scale: 100/89,
-      child: DropShadow(
-        offset: const Offset(0, 10),
-        opacity: 0.7,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: CarouselSlider.builder(
-            itemCount: 20,
-            itemBuilder: (context, index, realIdx) {
-              final movie = data.results![index];
-              final backdropPath = movie.backdropPath;
-              const urlImageBase = 'https://media.themoviedb.org/t/p/w400';
-              var imageUrl = urlImageBase + backdropPath!;
-              return CardHeaderCarrousel(
-                image: imageUrl,
-              );
-            },
-            options: CarouselOptions(
-              enableInfiniteScroll: true,
-              autoPlay: true,
-              aspectRatio: 2.0,
-              initialPage: 1,
-              enlargeCenterPage: true,
-              height: 156,
-            ),
-          ),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: CarouselSlider.builder(
+        itemCount: 20,
+        itemBuilder: (context, index, realIdx) {
+          final movie = data.results![index];
+          final backdropPath = movie.backdropPath;
+          const urlImageBase = 'https://media.themoviedb.org/t/p/w400';
+          var imageUrl = urlImageBase + backdropPath!;
+          return CardHeaderCarrousel(
+            image: imageUrl, id: movie.id!,
+          );
+        },
+        options: CarouselOptions(
+          enableInfiniteScroll: true,
+          autoPlay: true,
+          aspectRatio: 2.0,
+          initialPage: 1,
+          enlargeCenterPage: true,
+          height: 156,
         ),
       ),
     );
