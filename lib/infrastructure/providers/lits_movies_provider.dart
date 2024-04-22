@@ -10,3 +10,18 @@ final listMoviesPopularProvider = FutureProvider<ListMoviesModel>((ref) async {
   final listMoviesPopular = ref.watch(serviceListMoviesProvider);
   return listMoviesPopular.getMovieListPopular();
 });
+
+final listMoviesNowPlayingProvider = FutureProvider<ListMoviesModel>((ref) async {
+  final listMoviesNowPlaying = ref.watch(serviceListMoviesProvider);
+  return listMoviesNowPlaying.getMovieListNowPlaying();
+});
+
+final listMoviesTopRatedProvider = FutureProvider<ListMoviesModel>((ref) async {
+  final listMoviesTopRated = ref.watch(serviceListMoviesProvider);
+  return listMoviesTopRated.getMovieListTopRated();
+});
+
+final listMoviesUpcomingProvider = FutureProvider<ListMoviesModel>((ref) async {
+  final listMoviesUpcoming = ref.watch(serviceListMoviesProvider);
+  return listMoviesUpcoming.getMovieListUpcoming();
+});
