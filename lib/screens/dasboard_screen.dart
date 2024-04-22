@@ -145,6 +145,7 @@ class _Body extends ConsumerWidget {
                     children: [
                       CardMovieHorizonListSection(
                         image: imageUrl,
+                        id: movie.id!,
                       ),
                     ],
                   ),
@@ -167,9 +168,7 @@ class _Body extends ConsumerWidget {
           final backdropPath = movie.backdropPath;
           const urlImageBase = 'https://media.themoviedb.org/t/p/w400';
           var imageUrl = urlImageBase + backdropPath!;
-          return CardHeaderCarrousel(
-            image: imageUrl, id: movie.id!,
-          );
+          return CardHeaderCarrousel(image: imageUrl, id: movie.id!);
         },
         options: CarouselOptions(
           enableInfiniteScroll: true,
