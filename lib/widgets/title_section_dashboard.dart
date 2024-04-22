@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TitleSectionDashboard extends StatelessWidget {
+  final String? titleThing;
+  final String? titleBold;
   const TitleSectionDashboard({
     super.key,
+    this.titleThing = '',
+    this.titleBold = '',
   });
 
   @override
@@ -12,7 +16,7 @@ class TitleSectionDashboard extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'continue'.toUpperCase(),
+            titleThing!.toUpperCase(),
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w300,
@@ -20,7 +24,7 @@ class TitleSectionDashboard extends StatelessWidget {
           ),
           const SizedBox(width: 6),
           Text(
-            'watching'.toUpperCase(),
+            titleBold!.toUpperCase(),
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
