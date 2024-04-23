@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:the_movie_db_app/infrastructure/providers/detail_provider.dart';
 import "package:the_movie_db_app/widgets/widgets.dart";
 
 class DetailScreen extends ConsumerWidget {
@@ -8,6 +9,7 @@ class DetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final detailMovie = ref.watch(detailMoviesPopularProvider(id.toString()));
     return const Scaffold(
       backgroundColor: Color.fromARGB(255, 43, 43, 43),
       body: Stack(
@@ -16,6 +18,7 @@ class DetailScreen extends ConsumerWidget {
             children: [
               Stack(
                 children: [
+                  //TODO el unico q cambia principalImage
                   PrincipalImage(),
                   GradientImage(),
                   HeaderAppBar(),
