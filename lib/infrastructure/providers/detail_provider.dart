@@ -7,8 +7,7 @@ final serviceDetailMoviesProvider = Provider(
 );
 
 final detailMoviesPopularProvider =
-    FutureProvider.family<MoviesDetailModel, int>((ref, id) async {
+    FutureProvider.family<MoviesDetailModel, String>((ref, id) async {
   final detailMoviesService = ref.watch(serviceDetailMoviesProvider);
-  return detailMoviesService.getMovieDetail(id.toString());
+  return detailMoviesService.getMovieDetail(id);
 });
-

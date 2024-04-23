@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:the_movie_db_app/infrastructure/providers/detail_provider.dart';
 import "package:the_movie_db_app/widgets/widgets.dart";
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends ConsumerWidget {
   final int id;
   const DetailScreen({super.key, required this.id});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final detailMovie = ref.watch(detailMoviesPopularProvider(id.toString()));
     return const Scaffold(
       backgroundColor: Color.fromARGB(255, 43, 43, 43),
       body: Stack(
@@ -15,7 +18,9 @@ class DetailScreen extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  PrincipalImage(),
+                  //TODO el unico q cambia principalImage
+
+                  PrincipalImage(imageUrl: '',),
                   GradientImage(),
                   HeaderAppBar(),
                 ],
@@ -28,9 +33,9 @@ class DetailScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MovieInfo(),
+                        MovieInfo(match: '', releaseDate: '', duration: '',),
                         SizedBox(height: 10),
-                        MovieDescription(),
+                        MovieDescription(movieDescription: '',),
                         SizedBox(height: 20),
                         Text(
                           'Cast & Crew',
@@ -51,7 +56,7 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
-           FakeNavBar(),
+          FakeNavBar(),
           RowIconHeader(),
         ],
       ),

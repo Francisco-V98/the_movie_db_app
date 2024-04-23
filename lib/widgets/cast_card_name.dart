@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CastCardName extends StatelessWidget {
+  final String name;
   const CastCardName({
-    super.key,
+    super.key, required this.name,
   });
 
   @override
@@ -13,21 +14,17 @@ class CastCardName extends StatelessWidget {
         width: 100,
         height: 32,
         decoration: BoxDecoration(
-          color:
-              Colors.black.withOpacity(0.7),
-          borderRadius:
-              const BorderRadius.vertical(
+          color: Colors.black.withOpacity(0.7),
+          borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(8),
           ),
         ),
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(
-                  horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             children: [
               Text(
-                'Name'.toLowerCase(),
+                name.toLowerCase(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 12,
