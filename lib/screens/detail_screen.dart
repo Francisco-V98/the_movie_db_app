@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:the_movie_db_app/widgets/widgets.dart";
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends ConsumerWidget {
   final int id;
   const DetailScreen({super.key, required this.id});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return const Scaffold(
       backgroundColor: Color.fromARGB(255, 43, 43, 43),
       body: Stack(
@@ -51,7 +52,7 @@ class DetailScreen extends StatelessWidget {
               ),
             ],
           ),
-           FakeNavBar(),
+          FakeNavBar(),
           RowIconHeader(),
         ],
       ),
