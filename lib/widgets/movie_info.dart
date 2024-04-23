@@ -1,33 +1,40 @@
 import 'package:flutter/material.dart';
 
 class MovieInfo extends StatelessWidget {
+  final String match;
+  final String releaseDate;
+  final String duration;
+
   const MovieInfo({
-    super.key,
-  });
+    Key? key,
+    required this.match,
+    required this.releaseDate,
+    required this.duration,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         Text(
-          '84% match',
-          style: TextStyle(
+          '$match% match',
+          style: const TextStyle(
               color: Colors.green,
               fontWeight: FontWeight.bold,
               fontSize: 17),
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
         Text(
-          "2018",
-          style: TextStyle(
+          releaseDate,
+          style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 15),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(
-          "1h: 34 min",
-          style: TextStyle(
+          duration,
+          style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 15),

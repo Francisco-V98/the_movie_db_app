@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PrincipalImage extends StatelessWidget {
+  final String imageUrl;
   const PrincipalImage({
-    super.key,
+    super.key, required this.imageUrl,
   });
 
   @override
@@ -13,7 +14,7 @@ class PrincipalImage extends StatelessWidget {
         bottomRight: Radius.circular(50),
       ),
       child: Image.network(
-        '',
+        imageUrl,
         fit: BoxFit.cover,
         height: 400,
         width: double.infinity,
