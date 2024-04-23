@@ -19,7 +19,7 @@ class DetailScreen extends ConsumerWidget {
               Stack(
                 children: [
                   //TODO el unico q cambia principalImage
-                  PrincipalImage(),
+                  PrincipalImage(imageUrl: '',),
                   GradientImage(),
                   HeaderAppBar(),
                 ],
@@ -32,9 +32,9 @@ class DetailScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MovieInfo(),
+                        MovieInfo(match: '', releaseDate: '', duration: '',),
                         SizedBox(height: 10),
-                        MovieDescription(),
+                        MovieDescription(movieDescription: '',),
                         SizedBox(height: 20),
                         Text(
                           'Cast & Crew',
