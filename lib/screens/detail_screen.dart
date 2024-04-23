@@ -19,6 +19,7 @@ class DetailScreen extends ConsumerWidget {
               Stack(
                 children: [
                   //TODO el unico q cambia principalImage
+
                   PrincipalImage(imageUrl: '',),
                   GradientImage(),
                   HeaderAppBar(),
