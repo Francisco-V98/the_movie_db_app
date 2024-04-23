@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PrincipalImage extends StatelessWidget {
+  final String imageUrl;
   const PrincipalImage({
-    super.key,
+    super.key, required this.imageUrl,
   });
 
   @override
@@ -13,7 +14,7 @@ class PrincipalImage extends StatelessWidget {
         bottomRight: Radius.circular(50),
       ),
       child: Image.network(
-        'https://media.istockphoto.com/id/1289461335/photo/portrait-of-a-handsome-black-man.jpg?s=612x612&w=0&k=20&c=gDibbpmkeV04ta3ociwAgpqcjdeU5sI1nnd78wrnz-g=',
+        imageUrl,
         fit: BoxFit.cover,
         height: 400,
         width: double.infinity,

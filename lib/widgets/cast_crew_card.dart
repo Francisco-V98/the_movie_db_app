@@ -22,8 +22,8 @@ class CastAndCrewCard extends StatelessWidget {
               ),
               child: const Stack(
                 children: [
-                  ImageCard(),
-                  CastCardName(),
+                  ImageCard(imageUrl: '',),
+                  CastCardName(name: '',),
                 ],
               ),
             ),
