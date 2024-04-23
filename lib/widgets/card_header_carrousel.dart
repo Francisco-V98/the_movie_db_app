@@ -57,7 +57,7 @@ class _CardHeaderCarrouselState extends State<CardHeaderCarrousel> {
           borderRadius: BorderRadius.circular(32),
           boxShadow: [
             BoxShadow(
-              color: _shadowColor.withOpacity(0.3),
+              color: _shadowColor.withOpacity(0.5),
               blurRadius: 16,
               offset: const Offset(0, 8),
               spreadRadius: -6,
