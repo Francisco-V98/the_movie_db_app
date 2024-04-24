@@ -22,6 +22,7 @@ class _Body extends ConsumerWidget {
   const _Body();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // int page = 1;
     final listMoviePopular = ref.watch(listMoviesPopularProvider);
     final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider);
     final listMovieTopRated = ref.watch(listMoviesTopRatedProvider);

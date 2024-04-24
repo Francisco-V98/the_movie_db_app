@@ -30,14 +30,14 @@ class ListMoviesService {
     }
   }
 
-  Future<ListMoviesModel> getMovieListNowPlaying() async {
+  Future<ListMoviesModel> getMovieListNowPlaying(int page) async {
     String url = '$baseUrl/now_playing';
 
     try {
       Response response = await dio.get(
         url,
         options: Options(headers: headers),
-        // queryParameters: {'page': page}
+        queryParameters: {'page': page}
       );
       if (response.statusCode == 200) {
         return ListMoviesModel.fromJson(response.data);

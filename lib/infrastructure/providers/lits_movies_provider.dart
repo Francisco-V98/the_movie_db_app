@@ -11,9 +11,19 @@ final listMoviesPopularProvider = FutureProvider<ListMoviesModel>((ref) async {
   return listMoviesPopular.getMovieListPopular();
 });
 
-final listMoviesNowPlayingProvider = FutureProvider<ListMoviesModel>((ref) async {
-  final listMoviesNowPlaying = ref.watch(serviceListMoviesProvider);
-  return listMoviesNowPlaying.getMovieListNowPlaying();
+// final listMoviesNowPlayingProvider = FutureProvider<ListMoviesModel>((ref) async {
+//   final listMoviesNowPlaying = ref.watch(serviceListMoviesProvider);
+//   return listMoviesNowPlaying.getMovieListNowPlaying();
+// });
+
+final listMoviesNowPlayingProvider =
+    FutureProvider.autoDispose<ListMoviesModel>((ref) async {
+  final listMoviesService = ref.watch(serviceListMoviesProvider);
+  try {
+    return await listMoviesService.getMovieListNowPlaying(2);
+  } catch (e) {
+    throw Exception('Failed to load List Movies Now Playing: $e');
+  }
 });
 
 final listMoviesTopRatedProvider = FutureProvider<ListMoviesModel>((ref) async {
