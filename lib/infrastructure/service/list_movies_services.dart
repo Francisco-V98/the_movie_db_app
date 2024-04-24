@@ -37,6 +37,7 @@ class ListMoviesService {
       Response response = await dio.get(
         url,
         options: Options(headers: headers),
+        // queryParameters: {'page': page}
       );
       if (response.statusCode == 200) {
         return ListMoviesModel.fromJson(response.data);
