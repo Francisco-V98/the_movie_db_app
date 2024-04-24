@@ -22,11 +22,13 @@ class _Body extends ConsumerWidget {
   const _Body();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // int page = 1;
+    int page = 3;
     final listMoviePopular = ref.watch(listMoviesPopularProvider);
-    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider);
+    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider(page));
     final listMovieTopRated = ref.watch(listMoviesTopRatedProvider);
     final listMovieUpcoming = ref.watch(listMoviesUpcomingProvider);
+
+
     return Stack(
       children: [
         SingleChildScrollView(

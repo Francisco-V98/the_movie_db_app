@@ -17,10 +17,10 @@ final listMoviesPopularProvider = FutureProvider<ListMoviesModel>((ref) async {
 // });
 
 final listMoviesNowPlayingProvider =
-    FutureProvider.autoDispose<ListMoviesModel>((ref) async {
+    FutureProvider.autoDispose.family<ListMoviesModel, int>((ref, page) async {
   final listMoviesService = ref.watch(serviceListMoviesProvider);
   try {
-    return await listMoviesService.getMovieListNowPlaying(2);
+    return await listMoviesService.getMovieListNowPlaying(page);
   } catch (e) {
     throw Exception('Failed to load List Movies Now Playing: $e');
   }
