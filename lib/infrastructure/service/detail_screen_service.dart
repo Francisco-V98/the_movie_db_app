@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:the_movie_db_app/infrastructure/models/credits_model.dart';
 import 'package:the_movie_db_app/infrastructure/models/movies_details_model.dart';
 
 class DetailMoviesService {
@@ -29,4 +30,23 @@ class DetailMoviesService {
       throw Exception('Failed to load Movie Detail: $e');
     }
   }
+  
+  Future<Credits> getMovieCredits(String id) async {
+  String url = '$baseUrl/$id/credits';
+
+  try {
+    Response response = await dio.get(
+      url,
+      options: Options(headers: headers),
+    );
+    if (response.statusCode == 200) {
+      return Credits.fromJson(response.data);
+    } else {
+      throw Exception('Failed to load Movie Credits: ${response.statusCode}');
+    }
+  } catch (e) {
+    throw Exception('Failed to load Movie Credits: $e');
+  }
+}
+
 }
