@@ -120,6 +120,7 @@ class _Body extends ConsumerWidget {
   }
 
   Widget listMovies(ListMoviesModel data, String titleThing, String titleBold) {
+    int itemCount = 19;
     return Stack(
       children: [
         TitleSectionDashboard(titleThing: titleThing, titleBold: titleBold),
