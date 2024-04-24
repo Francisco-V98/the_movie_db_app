@@ -11,7 +11,7 @@ class CastCardName extends StatelessWidget {
     return Positioned(
       bottom: 0,
       child: Container(
-        width: 100,
+        width: 120,
         height: 32,
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.7),
@@ -23,14 +23,16 @@ class CastCardName extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             children: [
-              Text(
-                name.toLowerCase(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
+              Flexible( // Añade esto
+                child: Text(
+                  name.toLowerCase(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                  overflow: TextOverflow.ellipsis, // Asegúrate de que esto esté aquí para evitar el desbordamiento del texto
                 ),
               ),
-              const SizedBox(width: 16),
             ],
           ),
         ),
@@ -38,3 +40,5 @@ class CastCardName extends StatelessWidget {
     );
   }
 }
+
+
