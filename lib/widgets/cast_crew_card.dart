@@ -1,4 +1,6 @@
+
 import 'dart:math';
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -16,7 +18,9 @@ class CastAndCrewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+
       itemCount: min(10, castList?.length ?? 0),
+
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
         final cast = castList![index];

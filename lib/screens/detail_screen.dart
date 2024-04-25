@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:the_movie_db_app/infrastructure/models/credits_model.dart';
+import 'package:the_movie_db_app/infrastructure/models/movies_details_model.dart';
 import 'package:the_movie_db_app/infrastructure/providers/detail_provider.dart';
 import "package:the_movie_db_app/widgets/widgets.dart";
 
@@ -72,6 +74,7 @@ class DetailScreen extends ConsumerWidget {
           ),
         );
       },
+
       loading: () => const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
