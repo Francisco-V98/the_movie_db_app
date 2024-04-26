@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_movie_db_app/infrastructure/models/list_movies_model.dart';
 import 'package:the_movie_db_app/infrastructure/providers/lits_movies_provider.dart';
+import 'package:the_movie_db_app/infrastructure/providers/pagination_controller.dart';
 import '../widgets/widgets.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -20,14 +21,14 @@ class DashboardScreen extends StatelessWidget {
 
 class _Body extends ConsumerWidget {
   const _Body();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int page = 3;
     final listMoviePopular = ref.watch(listMoviesPopularProvider);
-    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider(page));
+    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider(1));
     final listMovieTopRated = ref.watch(listMoviesTopRatedProvider);
     final listMovieUpcoming = ref.watch(listMoviesUpcomingProvider);
-
+    final controller = ref.read(paginationControllerProvider);
 
     return Stack(
       children: [
@@ -57,7 +58,7 @@ class _Body extends ConsumerWidget {
                 children: [
                   listMovieNowPlaying.when(
                     data: (data) {
-                      return listMovies(data, 'Now', 'Playing');
+                      return listMovies(controller, data, 'Now', 'Playing');
                     },
                     error: ((error, stackTrace) {
                       return Text(error.toString());
@@ -74,7 +75,7 @@ class _Body extends ConsumerWidget {
                   ),
                   listMovieUpcoming.when(
                     data: (data) {
-                      return listMovies(data, 'Up', 'Comming');
+                      return listMovies(controller, data, 'Up', 'Comming');
                     },
                     error: ((error, stackTrace) {
                       return Text(error.toString());
@@ -91,7 +92,7 @@ class _Body extends ConsumerWidget {
                   ),
                   listMovieTopRated.when(
                     data: (data) {
-                      return listMovies(data, 'Top', 'Rated');
+                      return listMovies(controller, data, 'Top', 'Rated');
                     },
                     error: ((error, stackTrace) {
                       return Text(error.toString());
@@ -122,15 +123,15 @@ class _Body extends ConsumerWidget {
     );
   }
 
-  Widget listMovies(ListMoviesModel data, String titleThing, String titleBold) {
-    int itemCount = 19;
+  Widget listMovies(PaginationController controller, ListMoviesModel data, String titleThing, String titleBold) {
     return Stack(
       children: [
         TitleSectionDashboard(titleThing: titleThing, titleBold: titleBold),
         SizedBox(
           height: 200,
           child: ListView.builder(
-            itemCount: 19,
+            controller: controller.scrollController,
+            itemCount: data.results!.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               final movie = data.results![index];
