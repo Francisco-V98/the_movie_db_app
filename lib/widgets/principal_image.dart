@@ -18,6 +18,7 @@ class PrincipalImage extends StatelessWidget {
         bottomRight: Radius.circular(50),
       ),
       child: Image.network(
+        alignment: Alignment.topCenter,
         completeImageUrl,
         fit: BoxFit.cover,
         height: 400,

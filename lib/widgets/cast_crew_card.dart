@@ -1,6 +1,4 @@
 
-import 'dart:math';
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -18,9 +16,7 @@ class CastAndCrewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-
-      itemCount: min(10, castList?.length ?? 0),
-
+      itemCount: castList?.length ?? 0,
       scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) {
         final cast = castList![index];
@@ -48,12 +44,12 @@ class CastAndCrewCard extends StatelessWidget {
                           child: Container(color: Colors.transparent),
                         ),
                       ),
-                      Image.network(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                        width: 120,
-                        height: 225,
-                      ),
+                      Image.network(imageUrl,
+                          fit: BoxFit.cover, width: 120, height: 225,
+                          errorBuilder: (context, error, stackTrace) {
+                        return Image.network(
+                            "https://media.istockphoto.com/id/1289461335/photo/portrait-of-a-handsome-black-man.jpg?s=612x612&w=0&k=20&c=gDibbpmkeV04ta3ociwAgpqcjdeU5sI1nnd78wrnz-g=");
+                      }),
                       CastCardName(name: cast.name ?? ''),
                     ],
                   ),

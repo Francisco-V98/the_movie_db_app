@@ -9,28 +9,25 @@ class FakeNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 925,
-      bottom: 30,
-      left: 75,
-      right: 75,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Container(
+        height: 45,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32),
-          color: const Color.fromARGB(255, 87, 87, 87).withOpacity(0.6),
+          color: const Color.fromARGB(255, 87, 87, 87).withOpacity(0.4),
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(32),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 5),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Overview",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 217, 217, 217),
                       fontSize: 20),
                 ),
                 SizedBox(
@@ -39,16 +36,14 @@ class FakeNavBar extends StatelessWidget {
                 Text(
                   "Seasons",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 217, 217, 217),
                       fontSize: 20),
                 ),
                 SizedBox(width: 25),
                 Text(
                   "Similar",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 217, 217, 217),
                       fontSize: 20),
                 ),
               ],
