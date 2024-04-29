@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:the_movie_db_app/infrastructure/models/credits_model.dart';
-import 'package:the_movie_db_app/infrastructure/models/movies_details_model.dart';
-import 'package:the_movie_db_app/infrastructure/providers/detail_provider.dart';
+import 'package:intl/intl.dart';
+import 'package:the_movie_db_app/infrastructure/Helpers/helper.dart';
 import "package:the_movie_db_app/widgets/widgets.dart";
+import 'package:the_movie_db_app/infrastructure/providers/detail_provider.dart';
 
 class DetailScreen extends ConsumerWidget {
   final int id;
@@ -15,6 +16,9 @@ class DetailScreen extends ConsumerWidget {
     final movieData = ref.watch(movieDetailProvider(id.toString()));
     return movieData.when(
       data: (data) {
+        String releaseDate = DateFormat('dd-MM-yyyy').format(
+          data.detail?.releaseDate ?? DateTime.now(),
+        );
         return Scaffold(
           backgroundColor: const Color.fromARGB(255, 43, 43, 43),
           body: Stack(
@@ -37,11 +41,10 @@ class DetailScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             MovieInfo(
-                              match: '',
-                              releaseDate:
-                                  data.detail?.releaseDate?.toString() ?? '',
-                              duration: data.detail?.runtime?.toString() ?? '',
-                            ),
+                                match: '',
+                                releaseDate: releaseDate,
+                                duration: Helper.formatDuration(
+                                    data.detail!.runtime!)),
                             const SizedBox(height: 10),
                             MovieDescription(
                                 movieDescription: data.detail?.overview ?? ''),
@@ -68,13 +71,20 @@ class DetailScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const FakeNavBar(),
+              const Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FakeNavBar(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
               const RowIconHeader(),
             ],
           ),
         );
       },
-
       loading: () => const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
