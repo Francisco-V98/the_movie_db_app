@@ -12,9 +12,7 @@ class PaginationController extends ChangeNotifier {
   void scrollListener() {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      return page += 1;
     }
-    return page;
   }
 
   @override

@@ -19,13 +19,28 @@ class DashboardScreen extends StatelessWidget {
   }
 }
 
-class _Body extends ConsumerWidget {
+class _Body extends ConsumerStatefulWidget {
   const _Body();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends ConsumerState<_Body> {
+  
+  @override
+  void initState() {
+    super.initState();
+    ref.read(listMoviesPopularProvider);
+    ref.read(listMoviesNowPlayingProvider(1));
+    ref.read(listMoviesTopRatedProvider);
+    ref.read(listMoviesUpcomingProvider);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final listMoviePopular = ref.watch(listMoviesPopularProvider);
-    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider(1));
+    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider(3));
     final listMovieTopRated = ref.watch(listMoviesTopRatedProvider);
     final listMovieUpcoming = ref.watch(listMoviesUpcomingProvider);
     final controller = ref.read(paginationControllerProvider);
@@ -123,14 +138,15 @@ class _Body extends ConsumerWidget {
     );
   }
 
-  Widget listMovies(PaginationController controller, ListMoviesModel data, String titleThing, String titleBold) {
+  Widget listMovies(PaginationController controller, ListMoviesModel data,
+      String titleThing, String titleBold) {
     return Stack(
       children: [
         TitleSectionDashboard(titleThing: titleThing, titleBold: titleBold),
         SizedBox(
           height: 200,
           child: ListView.builder(
-            controller: controller.scrollController,
+            // controller: controller.scrollController,
             itemCount: data.results!.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
