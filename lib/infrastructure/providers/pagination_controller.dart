@@ -12,8 +12,10 @@ class PaginationController extends ChangeNotifier {
   void scrollListener() {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
+      print('Este es el fin');
     }
   }
+
 
   @override
   void dispose() {
@@ -21,22 +23,3 @@ class PaginationController extends ChangeNotifier {
     super.dispose();
   }
 }
-
-
-
-
-  // // Define una función para cargar más datos
-  // void loadMoreData(Function nextPage) {
-  //   if (!_loading &&
-  //       scrollController.position.pixels ==
-  //           scrollController.position.maxScrollExtent) {
-  //     // Indica que se está cargando para evitar múltiples llamadas simultáneas
-  //     _loading = true;
-
-  //     // Llama a la función nextPage para cargar la siguiente página de datos
-  //     nextPage().then((_) {
-  //       // Marca la carga como completada una vez que se obtienen los nuevos datos
-  //       _loading = false;
-  //     });
-  //   }
-  // }

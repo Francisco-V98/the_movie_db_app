@@ -28,19 +28,19 @@ class _Body extends ConsumerStatefulWidget {
 
 class _BodyState extends ConsumerState<_Body> {
   
-  @override
-  void initState() {
-    super.initState();
-    ref.read(listMoviesPopularProvider);
-    ref.read(listMoviesNowPlayingProvider(1));
-    ref.read(listMoviesTopRatedProvider);
-    ref.read(listMoviesUpcomingProvider);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   ref.read(listMoviesPopularProvider);
+  //   ref.read(listMoviesNowPlayingProvider(1));
+  //   ref.read(listMoviesTopRatedProvider);
+  //   ref.read(listMoviesUpcomingProvider);
+  // }
 
   @override
   Widget build(BuildContext context) {
     final listMoviePopular = ref.watch(listMoviesPopularProvider);
-    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider(3));
+    final listMovieNowPlaying = ref.watch(listMoviesNowPlayingProvider(1));
     final listMovieTopRated = ref.watch(listMoviesTopRatedProvider);
     final listMovieUpcoming = ref.watch(listMoviesUpcomingProvider);
     final controller = ref.read(paginationControllerProvider);
