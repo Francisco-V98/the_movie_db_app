@@ -9,11 +9,6 @@ class RowIconHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Positioned(
-      top: 360,
-      left: 16,
-      right: 16,
-      child: RowIconDetails(),
-    );
+    return RowIconDetails();
   }
 }
