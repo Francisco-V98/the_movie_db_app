@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MovieInfo extends StatelessWidget {
-  final String match;
+  final double popularity;
   final String releaseDate;
   final String duration;
 
   const MovieInfo({
     Key? key,
-    required this.match,
     required this.releaseDate,
-    required this.duration,
+    required this.duration, required this.popularity,
   }) : super(key: key);
 
   @override
@@ -17,7 +16,7 @@ class MovieInfo extends StatelessWidget {
     return Row(
       children: [
         Text(
-          '$match% match',
+          'Popularity: ${popularity.toStringAsFixed(2)}',
           style: const TextStyle(
               color: Colors.green,
               fontWeight: FontWeight.bold,
