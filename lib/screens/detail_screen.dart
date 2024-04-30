@@ -37,7 +37,7 @@ class DetailScreen extends ConsumerWidget {
                       children: [
                         PrincipalImage(imageUrl: data.detail?.posterPath ?? ''),
                         const GradientImage(),
-                         const HeaderAppBar(),
+                        const HeaderAppBar(),
                       ],
                     ),
                     const SizedBox(height: 30),
@@ -47,10 +47,11 @@ class DetailScreen extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           MovieInfo(
-                              match: '',
-                              releaseDate: releaseDate,
-                              duration:
-                                  Helper.formatDuration(data.detail!.runtime!)),
+                            popularity: data.detail?.popularity ?? 0,
+                            releaseDate: releaseDate,
+                            duration:
+                                Helper.formatDuration(data.detail!.runtime!),
+                          ),
                           const SizedBox(height: 10),
                           MovieDescription(
                               movieDescription: data.detail?.overview ?? ''),
